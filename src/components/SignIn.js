@@ -6,9 +6,9 @@ export default function SignIn() {
     const handleChange = () => {};
     const handleSignInGoogle = () => {};
     return (
-        <div class='h-screen flex items-center justify-center'>
-            <div class='content-center w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8'>
-                <h5 class='text-xl font-medium text-gray-900 dark:text-black'>
+        <div className='h-screen flex items-center justify-center'>
+            <div className='content-center w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8'>
+                <h5 className='text-xl font-medium text-gray-900 dark:text-black'>
                     Log In
                 </h5>
                 <div className='my-5 max-w-md'>
@@ -17,7 +17,7 @@ export default function SignIn() {
                         id='email'
                         name='email'
                         type='email'
-                        required='true'
+                        required={true}
                         className={fixedInputClass + ' my-3'}
                         placeholder='Email'
                     />
@@ -26,17 +26,17 @@ export default function SignIn() {
                         id='password'
                         name='password'
                         type='password'
-                        required='true'
+                        required={true}
                         className={fixedInputClass + ' my-3'}
                         placeholder='Password'
                     />
                     <button
                         onClick={handleSignInGoogle}
                         type='button'
-                        class='w-full px-3 py-2 mt-2 font-semibold text-gray-900 bg-white border-2 rounded-md shadow outline-none hover:bg-blue-50 hover:border-blue-400 focus:outline-none'
+                        className='w-full px-3 py-2 mt-2 font-semibold text-gray-900 bg-white border-2 rounded-md shadow outline-none hover:bg-blue-50 hover:border-blue-400 focus:outline-none'
                     >
                         <svg
-                            class='inline w-4 h-4 mr-3 text-gray-900 fill-current'
+                            className='inline w-4 h-4 mr-3 text-gray-900 fill-current'
                             aria-hidden='true'
                             focusable='false'
                             data-prefix='fab'
@@ -68,7 +68,7 @@ export default function SignIn() {
                     <button
                         onClick={handleSignInGoogle}
                         type='button'
-                        class='w-full px-3 py-2 mt-2 font-semibold text-gray-900 bg-white border-2 rounded-md shadow outline-none hover:bg-blue-50 hover:border-blue-400 focus:outline-none'
+                        className='w-full px-3 py-2 mt-2 font-semibold text-gray-900 bg-white border-2 rounded-md shadow outline-none hover:bg-blue-50 hover:border-blue-400 focus:outline-none'
                     >
                         Sign In
                     </button>
