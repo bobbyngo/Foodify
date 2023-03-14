@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 const fixedInputClass =
     'rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm';
@@ -7,12 +8,19 @@ const fixedInputClass =
 export default function SignUp() {
     const emailRef = React.useRef();
     const passwordRef = React.useRef();
+    // Get the signup method from context
+    const [loading, setLoading] = React.useState(false);
     const { signUp } = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = () => {};
     const handleSignUp = async (e) => {
-        e.preventDefault();
+        //e.preventDefault();
+        setLoading(true);
         await signUp(emailRef.current.value, passwordRef.current.value);
+        navigate('/');
+
+        setLoading(false);
     };
 
     return (
@@ -50,8 +58,9 @@ export default function SignUp() {
                     >
                         Sign Up
                     </button>
-                    <div className='w-100 text-center mt-2'>
-                        Already have an account? Log In
+                    <div className='w-100 text-center mt-5'>
+                        Already have an account?
+                        <Link to='/signin'> Log In</Link>
                     </div>
                 </div>
             </div>

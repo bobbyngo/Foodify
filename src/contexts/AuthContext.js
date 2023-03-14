@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { auth } from '../firebaseConfig';
+import { auth, googleAuth } from '../firebaseConfig';
 
 const AuthContext = React.createContext();
 
@@ -8,25 +8,44 @@ export function useAuth() {
 }
 
 export function AuthContextProvider({ children }) {
-    const [currentUser, setCurrentUser] = React.useState();
+    const [currentUser, setCurrentUser] = React.useState({});
     const [loading, setLoading] = React.useState(true);
 
     function signUp(email, password) {
         return auth.createUserWithEmailAndPassword(email, password);
     }
 
+    function login(email, password) {
+        return auth.signInWithEmailAndPassword(email, password);
+    }
+
+    function loginWithGoogle() {
+        const provider = googleAuth;
+        console.log(provider);
+        return auth.signInWithPopup(provider);
+    }
+
+    function logout() {
+        return auth.signOut();
+    }
+
     useEffect(() => {
-        const currentState = auth.onAuthStateChanged((user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            console.log(user);
             setCurrentUser(user);
             //not loading will render the children
             setLoading(false);
         });
-        currentState();
+        return unsubscribe;
     }, []);
 
+    // children will have access to these methods
     const value = {
         currentUser,
         signUp,
+        login,
+        loginWithGoogle,
+        logout,
     };
 
     return (

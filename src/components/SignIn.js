@@ -1,34 +1,58 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+
 const fixedInputClass =
     'rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm';
 
 export default function SignIn() {
-    const handleChange = () => {};
-    const handleSignInGoogle = () => {};
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    const { login, loginWithGoogle, currentUser } = useAuth();
+    const navigate = useNavigate();
+
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        try {
+            await login(emailRef.current.value, passwordRef.current.value);
+            //console.log(currentUser);
+            navigate('/');
+        } catch (err) {}
+    };
+
+    const handleSignInGoogle = async (e) => {
+        e.preventDefault();
+        try {
+            await loginWithGoogle();
+            //console.log(currentUser);
+            navigate('/');
+        } catch (err) {}
+    };
     return (
         <div className='h-screen flex items-center justify-center'>
             <div className='content-center w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8'>
                 <h5 className='text-xl font-medium text-gray-900 dark:text-black'>
                     Log In
                 </h5>
-                <div className='my-5 max-w-md'>
+                <form className='my-5 max-w-md'>
                     <input
-                        onChange={handleChange}
                         id='email'
                         name='email'
                         type='email'
                         required={true}
                         className={fixedInputClass + ' my-3'}
                         placeholder='Email'
+                        ref={emailRef}
                     />
                     <input
-                        onChange={handleChange}
                         id='password'
                         name='password'
                         type='password'
                         required={true}
                         className={fixedInputClass + ' my-3'}
                         placeholder='Password'
+                        ref={passwordRef}
                     />
                     <button
                         onClick={handleSignInGoogle}
@@ -66,13 +90,17 @@ export default function SignIn() {
                     </button>
 
                     <button
-                        onClick={handleSignInGoogle}
+                        onClick={handleSignIn}
                         type='button'
                         className='w-full px-3 py-2 mt-2 font-semibold text-gray-900 bg-white border-2 rounded-md shadow outline-none hover:bg-blue-50 hover:border-blue-400 focus:outline-none'
                     >
                         Sign In
                     </button>
-                </div>
+                    <div className='w-100 text-center mt-5'>
+                        Need an account?
+                        <Link to='/signup'> Sign up</Link>
+                    </div>
+                </form>
             </div>
         </div>
     );
