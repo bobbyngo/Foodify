@@ -21,7 +21,6 @@ export function AuthContextProvider({ children }) {
 
     function loginWithGoogle() {
         const provider = googleAuth;
-        console.log(provider);
         return auth.signInWithPopup(provider);
     }
 
@@ -31,7 +30,6 @@ export function AuthContextProvider({ children }) {
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
-            console.log(user);
             setCurrentUser(user);
             //not loading will render the children
             setLoading(false);

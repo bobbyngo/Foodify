@@ -1,6 +1,8 @@
 # Foodify
 
 ## Overview:
-Are you stressed because you ask your girl friend or crush "What do you want to eat" and they response "I can eat whatever" but it's not actually whatever?
+Are you stressed because your girlfriend or crush is coming over and you don't know want to cook? 
 <br/>
-This app is for you! Foodify will help
+Are you a gymmer that is struggling because of loosing appertize? 
+<br/>
+Foodify is the app that has 2 million recipes from 5000 top web recipe sources which will allow you to search for any healthy but tasty recipe!

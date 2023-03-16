@@ -1,24 +1,30 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-
+import Alert from './Alert';
 const fixedInputClass =
     'rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm';
 
 export default function SignIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
-
+    const [loading, setLoading] = React.useState(false);
+    const [err, setErr] = React.useState('');
     const { login, loginWithGoogle, currentUser } = useAuth();
     const navigate = useNavigate();
 
     const handleSignIn = async (e) => {
         e.preventDefault();
         try {
+            setErr('');
+            setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
-            //console.log(currentUser);
             navigate('/');
-        } catch (err) {}
+        } catch (err) {
+            console.log(err);
+            setErr('Invalid email or password');
+        }
+        setLoading(false);
     };
 
     const handleSignInGoogle = async (e) => {
@@ -35,6 +41,7 @@ export default function SignIn() {
                 <h5 className='text-xl font-medium text-gray-900 dark:text-black'>
                     Log In
                 </h5>
+                {err && <Alert msg={err} />}
                 <form className='my-5 max-w-md'>
                     <input
                         id='email'
@@ -92,6 +99,7 @@ export default function SignIn() {
                     <button
                         onClick={handleSignIn}
                         type='button'
+                        disabled={loading}
                         className='w-full px-3 py-2 mt-2 font-semibold text-gray-900 bg-white border-2 rounded-md shadow outline-none hover:bg-blue-50 hover:border-blue-400 focus:outline-none'
                     >
                         Sign In
