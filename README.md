@@ -1,7 +1,7 @@
 # Foodify
 
 ## Overview:
-Are you stressed because your girlfriend or crush is coming over and you don't know want to cook? 
+Are you stressed because your girlfriend or crush is coming over and you don't know what to cook? 
 <br/>
 Are you a gymmer that is struggling because of loosing appertize? 
 <br/>
